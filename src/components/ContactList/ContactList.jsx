@@ -1,7 +1,7 @@
 import { ContactItem } from 'components/ContactItem/ContactItem';
-import { deleteContact } from 'redux/ContactsSlices';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { deleteContactThunk } from 'redux/contactsAPI';
 
 export function ContactList() {
   const searchQuery = useSelector(state => state.filter);
@@ -26,7 +26,7 @@ console.log('contacts', contacts)
               key={contact.id}
               name={contact.name}
               number={contact.phone}
-              onDeleteContact={() => dispatch(deleteContact(contact.id))}
+              onDeleteContact={() => dispatch(deleteContactThunk(contact.id))}
               id={contact.id}
             ></ContactItem>
           ))

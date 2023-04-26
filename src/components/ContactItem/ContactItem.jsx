@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/ContactsSlices';
+import { deleteContactThunk } from 'redux/contactsAPI';
 import styled from 'styled-components';
 export const ContactItem = props => {
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export const ContactItem = props => {
       Name: {props.name} Phone: {props.number}
       <DeleteButton
         type="button"
-        onClick={() => dispatch(deleteContact(props.id))}
+        onClick={() => dispatch(deleteContactThunk(props.id))}
       >
         Delete
       </DeleteButton>

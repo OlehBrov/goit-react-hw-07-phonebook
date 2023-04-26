@@ -3,29 +3,28 @@ import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { PhonebookStyled } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/ContactsSlices';
-import { getAllContacts } from 'redux/contactsAPI';
+import { addContactThunk, getAllContactsThunk } from 'redux/contactsAPI';
 import { useEffect } from 'react';
-
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts.contactList);
   const dispatch = useDispatch();
   useEffect(() => {
-  dispatch(getAllContacts())
-},[])
+    dispatch(getAllContactsThunk());
+  }, [dispatch]);
+
   const checkEqualContact = contact => {
-    return contacts.some(
+    return contacts.items.some(
       el => el.name.toLowerCase() === contact.name.toLowerCase()
     );
   };
 
   const addContactCheck = contact => {
     if (!checkEqualContact(contact)) {
-      dispatch(addContact(contact));
+      dispatch(addContactThunk(contact))
+     
     } else alert('Such contact already exists');
   };
-
 
   return (
     <PhonebookStyled>
@@ -33,11 +32,10 @@ export const App = () => {
       {/* <button type='button' onClick={()=>dispatch(getAllContacts())}>getAllContacts</button> */}
       <ContactForm addContact={addContactCheck} />
 
-        <h2>Total contacts: {contacts.length}</h2>
+      <h2>Total contacts: {contacts.items.length}</h2>
       <Filter />
       <ContactList
-        // contactList={contacts}
-       
+      // contactList={contacts}
       ></ContactList>
     </PhonebookStyled>
   );

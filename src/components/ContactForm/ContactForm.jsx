@@ -12,10 +12,10 @@ import styled from 'styled-components';
 
 export const ContactForm = ({ addContact }) => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setNumber] = useState('');
 
   const handleSubmit = (values, { resetForm }) => {
-    addContact({ name, number });
+    addContact({ name, phone });
     setName('');
     setNumber('');
   };
@@ -23,7 +23,7 @@ export const ContactForm = ({ addContact }) => {
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === 'name') setName(value);
-    if (name === 'number') setNumber(value);
+    if (name === 'phone') setNumber(value);
   };
 //   const advancedSchema = Yup.object().shape({
 //   name: Yup
@@ -37,7 +37,7 @@ export const ContactForm = ({ addContact }) => {
 
   return (
     <Formik
-      initialValues={{ name: '', number: '' }}
+      initialValues={{ name: '', phone: '' }}
       // validationSchema={advancedSchema}
       onSubmit={handleSubmit}
     >
@@ -54,10 +54,10 @@ export const ContactForm = ({ addContact }) => {
 
         <LabelStyled htmlFor="number">Phone Number</LabelStyled>
         <Input
-          id="number"
-          name="number"
+          id="phone"
+          name="phone"
           placeholder="Enter phone number"
-          value={number}
+          value={phone}
           onChange={handleChange}
         />
         <ErrorMessage component="div" name="number" />

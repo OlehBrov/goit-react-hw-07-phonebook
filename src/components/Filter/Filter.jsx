@@ -6,7 +6,7 @@ import { setFilter } from 'redux/FilterSlices';
 
 export function Filter() {
   const filterValue = useSelector(state => state.filter);
-  const contactsAvailable = useSelector(state => state.contacts.contactList.length);
+  const contactsAvailable = useSelector(state => state.contacts.contactList.items.length);
   const dispatch = useDispatch();
 
   const handleChange = e => {
